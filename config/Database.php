@@ -2,9 +2,9 @@
 	class Database{
 		//db parameters
 		private $host = 'localhost';
-		private $db_name = 'blog';
-		private $username = 'sanjay';
-		private $password = 'test1234';
+		private $db_name = 'myblog';
+		private $username = 'root';
+		private $password = '';
 		private $conn;
 
 		//db connect
@@ -12,12 +12,14 @@
 			$this->conn = null;
 
 			try{
-				$conn = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
+				$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			}catch(PDOException $e){
     			echo "Connection failed: " . $e->getMessage();
     		}
-    		return $conn;
+    		return $this->conn;
 		}
 	}
+	// $db = new Database();
+	// $db->connect();
 ?>
