@@ -89,7 +89,17 @@
             $this->author = htmlspecialchars(strip_tags($this->author));
             $this->category_id = htmlspecialchars(strip_tags($this->category_id));
 
-            // continue here
+            // binding data
+            $stmt->bindParam(':title', $this->title);
+            $stmt->bindParam(':body', $this->body);
+            $stmt->bindParam(':author', $this->author);
+            $stmt->bindParam(':category_id', $this->category_id);
+
+            if($stmt->execute()){
+                return true;
+            }
+            printf("Error: %s.\n", $stmt->error);
+            return false;
         }
     }
 ?>
